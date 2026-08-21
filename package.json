@@ -1,6 +1,6 @@
 {
 	"name": "companion-module-visionmill-nextnote",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/visionmill/companion-module-visionmill-nextnote.git"
+		"url": "git+https://github.com/bitfocus/companion-module-visionmill-nextnote.git"
 	},
 	"engines": {
 		"node": "^22.20",

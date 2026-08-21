@@ -5,10 +5,10 @@
 	"name": "Visionmill: NextNote Display",
 	"shortname": "NextNote",
 	"description": "Control NextNote Display presentation software. Slide navigation, teleprompter scrolling, pointer control, layout switching, and helper selection via OSC.",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/visionmill/companion-module-visionmill-nextnote.git",
-	"bugs": "https://github.com/visionmill/companion-module-visionmill-nextnote/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-visionmill-nextnote.git",
+	"bugs": "https://github.com/bitfocus/companion-module-visionmill-nextnote/issues",
 	"maintainers": [
 		{
 			"name": "Jonathan Bond",
