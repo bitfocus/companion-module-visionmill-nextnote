@@ -7,6 +7,7 @@ export function getVariableDefinitions(): CompanionVariableDefinitions {
 	return {
 		scroll_speed: { name: 'Scroll Speed (0=stopped, 1–9)' },
 		pointer_enabled: { name: 'Pointer Enabled (0 or 1)' },
+		prompter_text_visible: { name: 'Prompter Text Visible (0=hidden, 1=visible; 0 until first feedback)' },
 		presentation_name: { name: 'Presentation Name' },
 		slide_current: { name: 'Current Slide Number' },
 		slide_total: { name: 'Total Slide Count' },

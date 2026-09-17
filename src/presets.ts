@@ -96,6 +96,21 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 		},
 	])
 
+	// MARK: - Prompter Text Visibility
+	presets.prompter_text_toggle = simplePreset(
+		'Prompter Text Toggle',
+		'PROMPTER\nTEXT',
+		combineRgb(60, 60, 60),
+		'prompter_text_toggle',
+		[
+			{
+				feedbackId: 'prompter_text_visible',
+				options: {},
+				style: { bgcolor: combineRgb(0, 180, 0), color: combineRgb(255, 255, 255) },
+			},
+		],
+	)
+
 	// MARK: - Scroll
 	presets.scroll_up = simplePreset('Scroll Up', '▲\nUP', combineRgb(30, 30, 30), 'scroll_up')
 	presets.scroll_stop = simplePreset('Scroll Stop', '■\nSTOP', combineRgb(180, 0, 0), 'scroll_stop', [
@@ -302,7 +317,14 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 					id: 'prompter',
 					name: 'Prompter',
 					type: 'simple',
-					presets: ['pointer_toggle', 'scroll_up', 'scroll_stop', 'scroll_down', 'display_speed'],
+					presets: [
+						'pointer_toggle',
+						'prompter_text_toggle',
+						'scroll_up',
+						'scroll_stop',
+						'scroll_down',
+						'display_speed',
+					],
 				},
 				{
 					id: 'info',

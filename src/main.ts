@@ -26,6 +26,7 @@ import { getVariableDefinitions } from './variables.js'
 export interface NextNoteState {
 	scrollSpeed: number
 	pointerEnabled: boolean
+	prompterTextVisible: boolean
 	presentationName: string
 	slideCurrentNumber: number
 	slideTotalCount: number
@@ -55,6 +56,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 	state: NextNoteState = {
 		scrollSpeed: 0,
 		pointerEnabled: false,
+		prompterTextVisible: false,
 		presentationName: '',
 		slideCurrentNumber: 0,
 		slideTotalCount: 0,
@@ -194,6 +196,13 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 				this.checkFeedbacks('pointer_active')
 				break
 			}
+			case '/nextnote/feedback/prompter_text': {
+				if (value !== 0 && value !== 1) break
+				this.state.prompterTextVisible = value === 1
+				this.setVariableValues({ prompter_text_visible: value })
+				this.checkFeedbacks('prompter_text_visible')
+				break
+			}
 			case '/nextnote/feedback/presentation': {
 				const name = typeof value === 'string' ? value : ''
 				this.state.presentationName = name
@@ -328,6 +337,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		const values: CompanionVariableValues = {
 			scroll_speed: 0,
 			pointer_enabled: 0,
+			prompter_text_visible: 0,
 			presentation_name: '',
 			slide_current: 0,
 			slide_total: 0,

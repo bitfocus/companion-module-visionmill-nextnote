@@ -18,6 +18,18 @@ export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefin
 			callback: () => instance.state.pointerEnabled,
 		},
 
+		prompter_text_visible: {
+			type: 'boolean',
+			name: 'Prompter Text: Is Visible',
+			description: 'Button lights up when NextNote reports that prompter text is visible',
+			defaultStyle: {
+				bgcolor: combineRgb(0, 180, 0),
+				color: combineRgb(255, 255, 255),
+			},
+			options: [],
+			callback: () => instance.state.prompterTextVisible,
+		},
+
 		scroll_active: {
 			type: 'boolean',
 			name: 'Scroll: Is Active',

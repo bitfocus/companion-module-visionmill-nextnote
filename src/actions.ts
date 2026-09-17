@@ -82,6 +82,23 @@ export function getActions(instance: NextNoteInstance): CompanionActionDefinitio
 			callback: () => instance.sendOSC('/nextnote/PointerToggle'),
 		},
 
+		// MARK: - Teleprompter Text Visibility
+		prompter_text_show: {
+			name: 'Prompter Text: Show',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextShow'),
+		},
+		prompter_text_hide: {
+			name: 'Prompter Text: Hide',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextHide'),
+		},
+		prompter_text_toggle: {
+			name: 'Prompter Text: Toggle',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextToggle'),
+		},
+
 		// MARK: - Teleprompter Scroll
 		scroll_up: {
 			name: 'Scroll: Up (press again to increase speed, max speed 9)',

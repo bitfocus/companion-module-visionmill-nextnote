@@ -43,6 +43,9 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 | Pointer: Turn On | `/nextnote/PointerOn` |
 | Pointer: Turn Off | `/nextnote/PointerOff` |
 | Pointer: Toggle | `/nextnote/PointerToggle` |
+| Prompter Text: Show | `/nextnote/PrompterTextShow` |
+| Prompter Text: Hide | `/nextnote/PrompterTextHide` |
+| Prompter Text: Toggle | `/nextnote/PrompterTextToggle` |
 | Scroll: Up | `/nextnote/Up` |
 | Scroll: Stop | `/nextnote/Stop` |
 | Scroll: Down | `/nextnote/Down` |
@@ -50,6 +53,8 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 | Helper: Select by Name | `/nextnote/<HelperName>` |
 
 **Scroll speed:** Pressing Up or Down repeatedly increases speed (1→9). Press Stop to halt scrolling.
+
+**Prompter text:** Show and Hide set visibility explicitly; Toggle reverses it. These actions leave the pointer and scrolling settings unchanged. The Prompter Text preset lights green when NextNote reports visible text. It updates from Display feedback, including changes made in NextNote itself, rather than assuming a command succeeded.
 
 **Memory slots:** Up to 20 named memory slots. Slot names are sent automatically by NextNote and appear as button labels in the Memory preset category.
 
@@ -62,6 +67,7 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 | Feedback | Condition |
 |---|---|
 | Pointer: Is Active | Lights up when teleprompter pointer is enabled |
+| Prompter Text: Is Visible | Lights up when prompter text is visible |
 | Scroll: Is Active | Lights up when scrolling at any speed |
 | Scroll: Speed Matches Value | Lights up when scroll speed equals selected value (0–9) |
 | Layout: Is Active | Lights up when the selected layout is currently active |
@@ -79,6 +85,7 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 |---|---|
 | `$(visionmill-nextnote:scroll_speed)` | Current scroll speed (0–9) |
 | `$(visionmill-nextnote:pointer_enabled)` | Pointer state (0 or 1) |
+| `$(visionmill-nextnote:prompter_text_visible)` | Text visibility: 0=hidden, 1=visible; initially 0 until feedback arrives |
 | `$(visionmill-nextnote:presentation_name)` | Current presentation filename |
 | `$(visionmill-nextnote:slide_current)` | Current slide number |
 | `$(visionmill-nextnote:slide_total)` | Total number of slides |
@@ -103,7 +110,7 @@ This version targets **Companion module API 2.0** for Companion **4.3+**.
 |---|---|
 | **Layout** | One button per layout mode, lights up when active |
 | **Slides** | First, Previous, Next, Last, Hide, Show |
-| **Prompter** | Scroll Up, Stop, Down, Pointer Toggle, Speed display |
+| **Prompter** | Scroll Up, Stop, Down, Pointer Toggle, Prompter Text Toggle, Speed display |
 | **Info** | Filename, Slide counter, Build counter |
 | **Memory** | 20 recall buttons labelled with slot names, lights up when active |
 | **Media** | Name, remaining time, and runtime display for up to 6 clips, colour-coded by playback state |
