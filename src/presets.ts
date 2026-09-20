@@ -1,3 +1,4 @@
+import { timerPresets, timerPresetGroups } from './speaker-timer.js'
 // presets.ts
 // Auto-generated preset buttons. Helper presets regenerate when the known helpers list changes.
 
@@ -17,7 +18,8 @@ type PresetStructure = Array<{
 }>
 
 export function getPresets(instance: NextNoteInstance): { structure: PresetStructure; presets: PresetDefinitions } {
-	const presets: PresetDefinitions = {}
+	const clockPresets = timerPresets()
+    const presets: PresetDefinitions = { ...clockPresets }
 
 	const simplePreset = (
 		name: string,
@@ -301,6 +303,7 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 			id: 'main',
 			name: 'NextNote',
 			definitions: [
+                ...timerPresetGroups,
 				{
 					id: 'layout',
 					name: 'Layout',

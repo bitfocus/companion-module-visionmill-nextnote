@@ -48,3 +48,12 @@ Buttons update automatically when NextNote sends state changes:
 - Helper names and memory slot names populate automatically as NextNote broadcasts them
 - The `prompter_text_visible` variable is 1 for visible text and 0 for hidden text. It starts at 0 until the first visibility feedback arrives.
 - Media slots support up to 6 simultaneous clips per slide
+## Speaker Timer
+
+- **Controls:** Reset, Flash, Show/Hide Timer, Pause, Start, ±5m/1m/30s, Set Timer and Undo Adjust. Pause is dark orange, Start dark green; the active button pulses lighter. Reset stops both pulses.
+- **Durations:** Set 5, 10, 15, 20, 30 or 60 minutes, ready for Start.
+- **Info:** speaker name, remaining time and state on one button; separate Hours, Minutes and Seconds presets are also available.
+
+Set Timer accepts H:MM:SS or MM:SS (default 0:15:00). It loads ready without saving the speaker memory. Existing numeric action values remain seconds. Global Show/Hide preserves the running timer and destination formatting. Flash is independent of transport pulsing.
+
+Drag presets onto buttons to use the current styling; existing buttons are not overwritten. NextNote Display must have OSC enabled with matching addresses and ports. Buttons follow confirmed feedback and return neutral styling if that feedback becomes stale. Presenter Timer and Web Timer use fixed layouts; mode actions apply to Presenter View, Next Slide and Prompter.

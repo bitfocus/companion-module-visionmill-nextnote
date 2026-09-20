@@ -1,3 +1,4 @@
+import { timerFeedbacks } from './speaker-timer.js'
 // feedbacks.ts
 // Companion feedbacks — change button appearance based on NextNote state
 
@@ -6,6 +7,7 @@ import type { NextNoteInstance } from './main.js'
 
 export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefinitions {
 	return {
+        ...timerFeedbacks(instance),
 		pointer_active: {
 			type: 'boolean',
 			name: 'Pointer: Is Active',

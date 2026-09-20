@@ -1,3 +1,4 @@
+import { timerVariables } from './speaker-timer.js'
 // variables.ts
 // Variables exposed to Companion — usable in button text via $(visionmill-nextnote:variable_id)
 
@@ -5,6 +6,7 @@ import type { CompanionVariableDefinitions } from '@companion-module/base'
 
 export function getVariableDefinitions(): CompanionVariableDefinitions {
 	return {
+        ...timerVariables,
 		scroll_speed: { name: 'Scroll Speed (0=stopped, 1–9)' },
 		pointer_enabled: { name: 'Pointer Enabled (0 or 1)' },
 		prompter_text_visible: { name: 'Prompter Text Visible (0=hidden, 1=visible; 0 until first feedback)' },
