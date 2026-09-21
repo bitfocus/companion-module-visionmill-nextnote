@@ -19,7 +19,7 @@ type PresetStructure = Array<{
 
 export function getPresets(instance: NextNoteInstance): { structure: PresetStructure; presets: PresetDefinitions } {
 	const clockPresets = timerPresets()
-    const presets: PresetDefinitions = { ...clockPresets }
+	const presets: PresetDefinitions = { ...clockPresets }
 
 	const simplePreset = (
 		name: string,
@@ -303,7 +303,7 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 			id: 'main',
 			name: 'NextNote',
 			definitions: [
-                ...timerPresetGroups,
+				...timerPresetGroups,
 				{
 					id: 'layout',
 					name: 'Layout',

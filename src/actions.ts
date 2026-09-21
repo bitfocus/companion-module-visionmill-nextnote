@@ -7,7 +7,7 @@ import type { NextNoteInstance } from './main.js'
 
 export function getActions(instance: NextNoteInstance): CompanionActionDefinitions {
 	return {
-        ...timerActions(instance),
+		...timerActions(instance),
 		// MARK: - Layout
 		layout_above: {
 			name: 'Layout: Slides Above Notes',

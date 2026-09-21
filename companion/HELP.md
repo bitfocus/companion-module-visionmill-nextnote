@@ -1,6 +1,7 @@
 ## Connection Setup
 
 **In NextNote Display**
+
 1. Open **Settings → System Settings**
 2. Enable **OSC Control**
 3. Note the **Listener Port** (default: `8000`)
@@ -10,9 +11,9 @@
 **In Companion**
 | Field | Value |
 |---|---|
-| **NextNote Display IP Address:**   |   IP of the machine running NextNote Display |
-| **NextNote OSC Listener Port:**   |   Must match the Listener Port set in NextNote (default: `8000`) |
-| **Companion Feedback Receive Port:**   |   Must match the Feedback Port set in NextNote (default: `9000`) |
+| **NextNote Display IP Address:** | IP of the machine running NextNote Display |
+| **NextNote OSC Listener Port:** | Must match the Listener Port set in NextNote (default: `8000`) |
+| **Companion Feedback Receive Port:** | Must match the Feedback Port set in NextNote (default: `9000`) |
 
 ---
 
@@ -25,7 +26,6 @@
 - **Memory Slots** — Recall up to 20 named layout memories
 - **Prompter** — Scroll up/down (press again to increase speed, max 9), Stop, Pointer on/off, Text Show/Hide/Toggle
 - **Slides** — First, Previous, Next, Last, Hide (black screen), Show
-
 
 ---
 
@@ -48,6 +48,7 @@ Buttons update automatically when NextNote sends state changes:
 - Helper names and memory slot names populate automatically as NextNote broadcasts them
 - The `prompter_text_visible` variable is 1 for visible text and 0 for hidden text. It starts at 0 until the first visibility feedback arrives.
 - Media slots support up to 6 simultaneous clips per slide
+
 ## Speaker Timer
 
 - **Controls:** Reset, Flash, Show/Hide Timer, Pause, Start, ±5m/1m/30s, Set Timer and Undo Adjust. Pause is dark orange, Start dark green; the active button pulses lighter. Reset stops both pulses.

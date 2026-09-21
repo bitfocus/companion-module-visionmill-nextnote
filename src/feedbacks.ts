@@ -7,7 +7,7 @@ import type { NextNoteInstance } from './main.js'
 
 export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefinitions {
 	return {
-        ...timerFeedbacks(instance),
+		...timerFeedbacks(instance),
 		pointer_active: {
 			type: 'boolean',
 			name: 'Pointer: Is Active',

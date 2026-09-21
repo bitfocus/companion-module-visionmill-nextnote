@@ -53,7 +53,7 @@ interface NextNoteInstanceTypes extends InstanceTypes {
 
 export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 	config!: NextNoteConfig
-    readonly speakerTimer = new SpeakerTimerCompanion(this)
+	readonly speakerTimer = new SpeakerTimerCompanion(this)
 
 	state: NextNoteState = {
 		scrollSpeed: 0,
@@ -85,7 +85,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		this.initVariableValues()
 
 		this.startFeedbackListener()
-        this.speakerTimer.start()
+		this.speakerTimer.start()
 		this.updateStatus(InstanceStatus.Ok)
 
 		// Request full state from NextNote after a short delay to allow UDP bind to complete
@@ -93,7 +93,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
 	async destroy(): Promise<void> {
-        this.speakerTimer.stop()
+		this.speakerTimer.stop()
 		this.stopFeedbackListener()
 	}
 
@@ -101,7 +101,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		this.config = config
 		this.stopFeedbackListener()
 		this.startFeedbackListener()
-        this.speakerTimer.start()
+		this.speakerTimer.start()
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
 
@@ -117,7 +117,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 	 */
 	private requestStateFromNextNote(): void {
 		this.sendOSC('/nextnote/RequestState')
-        this.sendOSC('/nextnote/timer/request')
+		this.sendOSC('/nextnote/timer/request')
 		this.log('info', 'Sent RequestState to NextNote Display')
 	}
 
@@ -186,7 +186,10 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 
 	private applyFeedback(address: string, args: OSCArg[]): void {
 		const value = args[0]
-        if (address === '/nextnote/feedback/timer') { this.speakerTimer.receive(value); return }
+		if (address === '/nextnote/feedback/timer') {
+			this.speakerTimer.receive(value)
+			return
+		}
 
 		switch (address) {
 			case '/nextnote/feedback/speed': {
