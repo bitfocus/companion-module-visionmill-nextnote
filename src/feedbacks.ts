@@ -1,3 +1,4 @@
+import { timerFeedbacks } from './speaker-timer.js'
 // feedbacks.ts
 // Companion feedbacks — change button appearance based on NextNote state
 
@@ -6,6 +7,7 @@ import type { NextNoteInstance } from './main.js'
 
 export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefinitions {
 	return {
+		...timerFeedbacks(instance),
 		pointer_active: {
 			type: 'boolean',
 			name: 'Pointer: Is Active',
@@ -16,6 +18,18 @@ export function getFeedbacks(instance: NextNoteInstance): CompanionFeedbackDefin
 			},
 			options: [],
 			callback: () => instance.state.pointerEnabled,
+		},
+
+		prompter_text_visible: {
+			type: 'boolean',
+			name: 'Prompter Text: Is Visible',
+			description: 'Button lights up when NextNote reports that prompter text is visible',
+			defaultStyle: {
+				bgcolor: combineRgb(0, 180, 0),
+				color: combineRgb(255, 255, 255),
+			},
+			options: [],
+			callback: () => instance.state.prompterTextVisible,
 		},
 
 		scroll_active: {

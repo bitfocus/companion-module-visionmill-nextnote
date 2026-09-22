@@ -1,3 +1,4 @@
+import { timerPresets, timerPresetGroups } from './speaker-timer.js'
 // presets.ts
 // Auto-generated preset buttons. Helper presets regenerate when the known helpers list changes.
 
@@ -17,7 +18,8 @@ type PresetStructure = Array<{
 }>
 
 export function getPresets(instance: NextNoteInstance): { structure: PresetStructure; presets: PresetDefinitions } {
-	const presets: PresetDefinitions = {}
+	const clockPresets = timerPresets()
+	const presets: PresetDefinitions = { ...clockPresets }
 
 	const simplePreset = (
 		name: string,
@@ -95,6 +97,21 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 			style: { bgcolor: combineRgb(255, 100, 0), color: combineRgb(255, 255, 255) },
 		},
 	])
+
+	// MARK: - Prompter Text Visibility
+	presets.prompter_text_toggle = simplePreset(
+		'Prompter Text Toggle',
+		'PROMPTER\nTEXT',
+		combineRgb(60, 60, 60),
+		'prompter_text_toggle',
+		[
+			{
+				feedbackId: 'prompter_text_visible',
+				options: {},
+				style: { bgcolor: combineRgb(0, 180, 0), color: combineRgb(255, 255, 255) },
+			},
+		],
+	)
 
 	// MARK: - Scroll
 	presets.scroll_up = simplePreset('Scroll Up', '▲\nUP', combineRgb(30, 30, 30), 'scroll_up')
@@ -286,6 +303,7 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 			id: 'main',
 			name: 'NextNote',
 			definitions: [
+				...timerPresetGroups,
 				{
 					id: 'layout',
 					name: 'Layout',
@@ -302,7 +320,14 @@ export function getPresets(instance: NextNoteInstance): { structure: PresetStruc
 					id: 'prompter',
 					name: 'Prompter',
 					type: 'simple',
-					presets: ['pointer_toggle', 'scroll_up', 'scroll_stop', 'scroll_down', 'display_speed'],
+					presets: [
+						'pointer_toggle',
+						'prompter_text_toggle',
+						'scroll_up',
+						'scroll_stop',
+						'scroll_down',
+						'display_speed',
+					],
 				},
 				{
 					id: 'info',

@@ -1,3 +1,4 @@
+import { SpeakerTimerCompanion } from './speaker-timer.js'
 // main.ts
 // NextNote Display — Bitfocus Companion Module
 // Controls NextNote Display via OSC over UDP.
@@ -26,6 +27,7 @@ import { getVariableDefinitions } from './variables.js'
 export interface NextNoteState {
 	scrollSpeed: number
 	pointerEnabled: boolean
+	prompterTextVisible: boolean
 	presentationName: string
 	slideCurrentNumber: number
 	slideTotalCount: number
@@ -51,10 +53,12 @@ interface NextNoteInstanceTypes extends InstanceTypes {
 
 export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 	config!: NextNoteConfig
+	readonly speakerTimer = new SpeakerTimerCompanion(this)
 
 	state: NextNoteState = {
 		scrollSpeed: 0,
 		pointerEnabled: false,
+		prompterTextVisible: false,
 		presentationName: '',
 		slideCurrentNumber: 0,
 		slideTotalCount: 0,
@@ -81,6 +85,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		this.initVariableValues()
 
 		this.startFeedbackListener()
+		this.speakerTimer.start()
 		this.updateStatus(InstanceStatus.Ok)
 
 		// Request full state from NextNote after a short delay to allow UDP bind to complete
@@ -88,6 +93,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
 	async destroy(): Promise<void> {
+		this.speakerTimer.stop()
 		this.stopFeedbackListener()
 	}
 
@@ -95,6 +101,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		this.config = config
 		this.stopFeedbackListener()
 		this.startFeedbackListener()
+		this.speakerTimer.start()
 		setTimeout(() => this.requestStateFromNextNote(), 3000)
 	}
 
@@ -110,6 +117,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 	 */
 	private requestStateFromNextNote(): void {
 		this.sendOSC('/nextnote/RequestState')
+		this.sendOSC('/nextnote/timer/request')
 		this.log('info', 'Sent RequestState to NextNote Display')
 	}
 
@@ -178,6 +186,10 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 
 	private applyFeedback(address: string, args: OSCArg[]): void {
 		const value = args[0]
+		if (address === '/nextnote/feedback/timer') {
+			this.speakerTimer.receive(value)
+			return
+		}
 
 		switch (address) {
 			case '/nextnote/feedback/speed': {
@@ -192,6 +204,13 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 				this.state.pointerEnabled = enabled
 				this.setVariableValues({ pointer_enabled: enabled ? 1 : 0 })
 				this.checkFeedbacks('pointer_active')
+				break
+			}
+			case '/nextnote/feedback/prompter_text': {
+				if (value !== 0 && value !== 1) break
+				this.state.prompterTextVisible = value === 1
+				this.setVariableValues({ prompter_text_visible: value })
+				this.checkFeedbacks('prompter_text_visible')
 				break
 			}
 			case '/nextnote/feedback/presentation': {
@@ -328,6 +347,7 @@ export class NextNoteInstance extends InstanceBase<NextNoteInstanceTypes> {
 		const values: CompanionVariableValues = {
 			scroll_speed: 0,
 			pointer_enabled: 0,
+			prompter_text_visible: 0,
 			presentation_name: '',
 			slide_current: 0,
 			slide_total: 0,

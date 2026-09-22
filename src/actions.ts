@@ -1,3 +1,4 @@
+import { timerActions } from './speaker-timer.js'
 // actions.ts
 // All Companion actions mapped to /nextnote/ OSC commands
 
@@ -6,6 +7,7 @@ import type { NextNoteInstance } from './main.js'
 
 export function getActions(instance: NextNoteInstance): CompanionActionDefinitions {
 	return {
+		...timerActions(instance),
 		// MARK: - Layout
 		layout_above: {
 			name: 'Layout: Slides Above Notes',
@@ -80,6 +82,23 @@ export function getActions(instance: NextNoteInstance): CompanionActionDefinitio
 			name: 'Pointer: Toggle',
 			options: [],
 			callback: () => instance.sendOSC('/nextnote/PointerToggle'),
+		},
+
+		// MARK: - Teleprompter Text Visibility
+		prompter_text_show: {
+			name: 'Prompter Text: Show',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextShow'),
+		},
+		prompter_text_hide: {
+			name: 'Prompter Text: Hide',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextHide'),
+		},
+		prompter_text_toggle: {
+			name: 'Prompter Text: Toggle',
+			options: [],
+			callback: () => instance.sendOSC('/nextnote/PrompterTextToggle'),
 		},
 
 		// MARK: - Teleprompter Scroll
