@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-/* eslint-disable n/no-unpublished-import */
+/* eslint-disable n/no-missing-import, n/no-unpublished-import */
 import {
 	SpeakerTimerCompanion,
 	parseTimerSnapshot,
@@ -12,7 +12,7 @@ import {
 	timerTransportColour,
 } from '../dist/speaker-timer.js'
 import { getPresets } from '../dist/presets.js'
-/* eslint-enable n/no-unpublished-import */
+/* eslint-enable n/no-missing-import, n/no-unpublished-import */
 
 function snapshot(sequence = 1, session = 'show-a') {
 	return {

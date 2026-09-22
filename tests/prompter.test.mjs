@@ -1,9 +1,11 @@
+/* eslint-disable n/no-missing-import, n/no-unpublished-import */
 import assert from 'node:assert/strict'
 import dgram from 'node:dgram'
 import { once } from 'node:events'
 import fs from 'node:fs'
 import test from 'node:test'
 import { NextNoteInstance } from '../dist/main.js'
+/* eslint-enable n/no-missing-import, n/no-unpublished-import */
 
 globalThis.COMPANION_LOGGER = () => {}
 
